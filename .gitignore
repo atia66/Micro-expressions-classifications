@@ -1,0 +1,8 @@
+Model/*.pt
+Model/*.pth
+*.pt
+*.pth
+
+Data/
+test/
+__pycache__/
