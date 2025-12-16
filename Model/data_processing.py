@@ -46,16 +46,20 @@ def create_dataset(root="../Data"):
     return x,y
 
 def save_processed_dataset(root="../data", save_path="processed_dataset.pt"):
+    
     x,y = create_dataset(root)
 
     torch.save({"X": x, "y": y}, save_path)
 
     print(f"\nSaved processed dataset to: {save_path}")
+    
     print(f"Saved shapes: X={x.shape}, y={y.shape}")
 
 
 def load_processed_dataset(dataset_path="processed_dataset.pt"):
+    
     data = torch.load(dataset_path, map_location="cpu")
+    
     X, y = data["X"], data["y"]
     print(f"\nLoaded dataset shapes: X={X.shape}, y={y.shape}")
     return X, y

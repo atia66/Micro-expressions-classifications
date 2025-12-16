@@ -3,16 +3,15 @@ import torch.nn.functional as F
 import cv2
 import numpy as np
 
-
 class GradCAM:
+    
     def __init__(self, model):
         self.model = model
         self.gradients = None
         self.features = None
-
+        
         self.target_layer = self._find_last_conv()
 
-        # Register hooks
         self._register_hooks()
 
     def _find_last_conv(self):

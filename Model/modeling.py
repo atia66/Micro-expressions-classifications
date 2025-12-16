@@ -11,11 +11,12 @@ from model import SmallCNN
 def train(model, loader, device, epochs, patience):
     
     criterion = nn.CrossEntropyLoss()
+    
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     model.train()
-
+    
     train_loader,val_loader=split_data(loader)
-
+    
     best_val_acc = 0.0
     counter = 0
 
@@ -62,9 +63,6 @@ def train(model, loader, device, epochs, patience):
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             counter = 0
-            scripted_model = torch.jit.script(model)
-            
-            torch.jit.save(scripted_model, "best_model_acc.pt")
             torch.save(model.state_dict(),"best_model_acc.pth")
         else:
             counter += 1
